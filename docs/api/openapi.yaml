@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  title: NTT Data Microservices API
+  version: 1.0.0
+  description: API documentation for Product and Order services
+
+servers:
+  - url: http://localhost:8700
+    description: API Gateway
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        descricao:
+          type: string
+        preco:
+          type: number
+          format: double
+      required:
+        - nome
+        - descricao
+        - preco
+
+    Order:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        total:
+          type: number
+          format: double
+
+    OrderItem:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        quantidade:
+          type: integer
+        precoUnitario:
+          type: number
+          format: double
+        subtotal:
+          type: number
+          format: double
+
+security:
+  - bearerAuth: []
+
+paths:
+  /produtos:
+    get:
+      summary: Lista todos os produtos
+      responses:
+        '200':
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Cria um novo produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Produto criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+  /produtos/{id}:
+    get:
+      summary: Busca um produto por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produto não encontrado
+
+    put:
+      summary: Atualiza um produto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Produto atualizado
+        '404':
+          description: Produto não encontrado
+
+    delete:
+      summary: Remove um produto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produto removido
+        '404':
+          description: Produto não encontrado
+
+  /pedidos/produtos:
+    get:
+      summary: Lista produtos disponíveis para pedido
+      responses:
+        '200':
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /pedidos/simular:
+    post:
+      summary: Simula a criação de um pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderItem'
+      responses:
+        '200':
+          description: Simulação do pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
