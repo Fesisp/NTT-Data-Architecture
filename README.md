@@ -1,4 +1,5 @@
-# 🛍️ Microservices Demo - Sistema de Gestão de Pedidos
+# 🛍️ Microserviços - Arquitetura - DevOps
+  Sistema de Gestão de Pedidos
 
 ![Spring](https://img.shields.io/badge/Spring%20Boot-3.1.5-brightgreen)
 ![Java](https://img.shields.io/badge/Java-24-orange)
