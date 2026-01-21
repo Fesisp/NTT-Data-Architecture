@@ -3,10 +3,12 @@
 
 ![Spring](https://img.shields.io/badge/Spring%20Boot-3.1.5-brightgreen)
 ![Java](https://img.shields.io/badge/Java-24-orange)
-![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![CI/CD](https://img.shields.io/github/actions/workflow/status/Fesisp/NTT-Data/maven.yml?label=CI%2FCD)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.0-6DB33F?logo=spring&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Microservices](https://img.shields.io/badge/Architecture-Microservices-purple?logo=htmx&logoColor=white)]()
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > Uma demonstração prática e profissional de uma arquitetura de microserviços usando Spring Boot 3.1.5 e Java 24. Este projeto implementa um sistema completo de gestão de produtos e pedidos, com CI/CD automatizado, containerização Docker e monitoramento integrado.
 
